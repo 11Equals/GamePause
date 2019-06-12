@@ -1,0 +1,35 @@
+Game::BackButton::OnPress() {
+  if (focusedScene->usesBackButton) {
+    focusedScene->backButtonPressed();
+  }
+  else {
+  defaultAction.Now();
+  }
+}
+
+Game::DefaultAction::Now() {
+  if (running) {
+    PauseMostScenes();
+    ResumeScene(pauseMenu);
+  }
+else {
+    PauseMenu();
+    ResumeMostScenes();
+  }
+}
+
+Game::PauseMostScenes() {
+  for (auto& scene : scenes) {
+    if (scene.shouldPauseOnBack) {
+      scene.Pause();
+    }
+  }
+}
+
+game::ResumeMostScenes() {
+  for (auto& scene : scenes) {
+    if (scene.shouldResumeAfterPause) {
+      scene.Resume();
+    }
+  }
+}
