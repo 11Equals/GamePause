@@ -20,7 +20,7 @@ else {
 
 Game::PauseMostScenes() {
   for (auto& scene : scenes) {
-    if (scene.shouldPauseOnBack) {
+    if (scene.ShouldPauseOnBack()) { // if the scene is running, check a boolean to see if it should pause
       scene.Pause();
     }
   }
@@ -28,7 +28,7 @@ Game::PauseMostScenes() {
 
 game::ResumeMostScenes() {
   for (auto& scene : scenes) {
-    if (scene.shouldResumeAfterPause) {
+    if (scene.ShouldResumeAfterPause()) { // this checks an enum to see what paused the scene
       scene.Resume();
     }
   }
